@@ -1,0 +1,118 @@
+/* Basic styles */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('https://cdn.mos.cms.futurecdn.net/a39NsKS2NYbmdPZiwqccpa.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Header */
+header {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 100px;
+    height: auto;
+    margin-right: 10px; /* Adds space between logo and brand name */
+}
+
+.brand-name {
+    font-weight: bold;
+    color: white; /* White color for brand name */
+    font-size: 24px;
+    margin: 0; /* Remove any extra margin */
+}
+
+/* Content container */
+.content-container {
+    background-color: rgba(0, 0, 0, 0.522); /* Black background with 80% opacity */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0);
+}
+
+/* Content */
+.content {
+    text-align: center;
+    color: white; /* White font color */
+    font-weight: bold; /* Bold font */
+}
+
+.main-heading {
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: white; /* White font color */
+    font-weight: bold; /* Bold font */
+}
+
+/* Pricing */
+.pricing {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+
+.plan {
+    background-color: #ffffff;
+    color: #333333; /* Dark gray text color for readability */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.plan:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.price {
+    font-size: 20px;
+    margin-top: 10px;
+    color: #007bff; /* Blue color for price tags */
+}
+
+/* Payment form */
+.payment-form {
+    text-align: left;
+    margin-top: 20px;
+}
+
+input[type="email"],
+input[type="text"],
+input[type="password"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

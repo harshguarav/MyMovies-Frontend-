@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Options</title>
+    <style>
+        /* Payment page styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: skyblue;
+            color: black;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        header {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .brand-name {
+            font-weight: bold;
+            color: #343a40;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .container {
+            width: 400px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .heading {
+            font-size: 24px;
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+
+        select,
+        input {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        /* Styling the button */
+        #subscribe-button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        /* Button hover effect */
+        #subscribe-button:hover {
+            background-color: #218838;
+        }
+
+        /* Hidden element */
+        .hidden {
+            display: none;
+        }
+
+        /* Summary styles */
+        .summary {
+            text-align: left;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        /* Security badge styles */
+        .security-badge {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                width: 100%;
+                padding: 10px;
+            }
+
+            #subscribe-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- MyMovies logo added in the content box -->
+        <img src="logo.png" alt="MyMovies Logo" class="logo">
+
+        <!-- Bill Summary Section -->
+        <div class="summary">
+            <h3>Bill Summary:</h3>
+            <p>Subscription Option: <span id="subscriptionOption"></span></p>
+            <p>Cost: ₹<span id="cost"></span></p>
+            <p>GST: ₹0 (0%)</p>
+            <p>Total Cost: ₹<span id="totalCost"></span></p>
+        </div>
+
+        <h2 class="heading">Choose Your Payment Method</h2>
+        <select id="paymentMethod" onchange="changePaymentMethod()">
+            <option value="">-- Select Payment Method --</option>
+            <option value="upi">UPI</option>
+            <option value="netbanking">Net Banking</option>
+            <option value="creditcard">Credit Card</option>
+            <option value="emi">EMI</option>
+        </select>
+
+        <div id="paymentOptions"></div>
+
+        <!-- Subscribe Button -->
+        <button id="subscribe-button" onclick="processPayment()">Subscribe</button>
+
+        <!-- Security Badge -->
+        <div class="security-badge">
+            <img src="secure.png" alt="Secure Payment" style="width: 50px; height: 50px;">
+            <p>Secure Payment</p>
+        </div>
+    </div>
+
+    <script>
+        // Function to parse URL parameters
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Function to update the bill summary
+        function updateBillSummary() {
+            const plan = getUrlParameter('plan');
+            const cost = parseFloat(getUrlParameter('cost'));
+
+            document.getElementById('subscriptionOption').textContent = plan === 'monthly' ? 'Monthly Plan' : 'Yearly Plan';
+            document.getElementById('cost').textContent = cost;
+
+            document.getElementById('totalCost').textContent = cost;
+        }
+
+        window.addEventListener('load', updateBillSummary);
+
+        function changePaymentMethod() {
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const paymentOptionsDiv = document.getElementById('paymentOptions');
+
+            paymentOptionsDiv.innerHTML = '';
+
+            if (paymentMethod === 'upi') {
+                paymentOptionsDiv.innerHTML = `
+                    <h3>Pay with QR Code</h3>
+                    <img src="Qr.PNG.jpg" alt="QR Code" class="qr-code" style="width: 150px; height: 150px;">
+                    <p id="timer">Time remaining: 2:00</p>
+                    <hr>
+                    <h3>Or Enter Your UPI ID:</h3>
+                    <input type="text" id="upi-id-input" placeholder="Enter your UPI ID" aria-label="UPI ID" required>
+                `;
+                startTimer(2);
+            } else if (paymentMethod === 'netbanking') {
+                paymentOptionsDiv.innerHTML = `
+                    <h3>Select Your Bank:</h3>
+                    <select id="bankOptions">
+                        <option value="sbi">SBI</option>
+                        <option value="hdfc">HDFC</option>
+                        <option value="axis">Axis Bank</option>
+                        <option value="icici">ICICI Bank</option>
+                    </select>
+                    <div id="netBankingFields" class="hidden">
+                        <input type="text" id="login" placeholder="Enter your login" aria-label="Login" required><br>
+                        <input type="password" id="password" placeholder="Enter your password" aria-label="Password" required><br>
+                    </div>
+                `;
+                document.getElementById('bankOptions').addEventListener('change', function() {
+                    document.getElementById('netBankingFields').classList.remove('hidden');
+                });
+            } else if (paymentMethod === 'creditcard') {
+                paymentOptionsDiv.innerHTML = `
+                    <h3>Credit Card Details:</h3>
+                    <input type="text" placeholder="Card Number" aria-label="Card Number" required><br>
+                    <input type="text" placeholder="Expiry Date (MM/YY)" aria-label="Expiry Date" required><br>
+                    <input type="text" placeholder="CVV" aria-label="CVV" required><br>
+                `;
+            } else if (paymentMethod === 'emi') {
+                paymentOptionsDiv.innerHTML = `
+                    <h3>EMI Details:</h3>
+                    <input type="text" placeholder="Bank Name" aria-label="Bank Name" required><br>
+                    <input type="text" placeholder="Card Number" aria-label="Card Number" required><br>
+                    <input type="text" placeholder="Expiry Date (MM/YY)" aria-label="Expiry Date" required><br>
+                    <input type="text" placeholder="CVV" aria-label="CVV" required><br>
+                `;
+            }
+        }
+
+        function startTimer(minutes) {
+            let timeLeft = minutes * 60;
+            const timerElement = document.getElementById('timer');
+
+            const interval = setInterval(() => {
+                timeLeft--;
+                const minutesLeft = Math.floor(timeLeft / 60);
+                const secondsLeft = timeLeft % 60;
+                timerElement.textContent = `Time remaining: ${minutesLeft}:${secondsLeft.toString().padStart(2, '0')}`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    timerElement.textContent = 'QR code expired.';
+                }
+            }, 1000);
+        }
+
+        function processPayment() {
+            alert('Payment processing...');
+        }
+    </script>
+</body>
+</html>

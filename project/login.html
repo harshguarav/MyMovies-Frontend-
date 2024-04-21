@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MyMovies</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .login-container {
+            background-image: url('https://i.redd.it/zjgs096khv591.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-form {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 100px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-form">
+            <div class="logo">
+                <img src="logo.png" alt="MyMovies Logo">
+            </div>
+            <h2 class="text-center">Login to MyMovies</h2>
+            <form id="loginForm" onsubmit="return login()">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" class="form-control" id="username" placeholder="Enter username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" id="password" placeholder="Enter password">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+            <div class="text-center mt-3">
+                <button onclick="googleLogin()" class="btn btn-danger">Login with Google</button>
+                <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+                <button class="btn btn-info"><a href="subscription.html">Subscribe</a></button>
+            </div>
+        </div>
+    </div>
+    
+
+    <script>
+        function login() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            // Perform simple validation
+            if (username === '' || password === '') {
+                alert('Please enter both username and password.');
+                return false;
+            }
+
+            // Perform authentication - This is just a basic example, in real application, you would check credentials against a backend/database
+            if (username === 'admin' && password === 'password') {
+                alert('Login successful!');
+                window.location.href = 'home.html'; // Redirect to the home page after successful login
+                return false; // Prevent form submission
+            } else {
+                alert('Invalid username or password. Please try again.');
+                return false;
+            }
+        }
+
+        function googleLogin() {
+            // Perform Google login logic here
+            alert('Google login clicked.');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyMovies Subscription</title>
+    <!-- <link rel="stylesheet" href="subscription.css"> -->
+    <!-- <script src="subscription.js"></script> -->
+    <style>
+        /* Basic styles */
+/* Basic styles */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('https://cdn.mos.cms.futurecdn.net/a39NsKS2NYbmdPZiwqccpa.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Header */
+header {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 120px; /* Increase logo size */
+    height: auto;
+}
+
+.brand-name {
+    font-weight: bold;
+    color: white;
+    font-size: 24px;
+    margin: 0; /* Remove any extra margin */
+}
+
+/* Content container */
+.content-container {
+    background-color: rgba(0, 0, 0, 0.5); /* Black background with 50% opacity */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Content */
+.content {
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+.main-heading {
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+/* Pricing */
+.pricing {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+
+.plan {
+    background-color: white;
+    color: black; /* Adjusted text color for readability */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    text-align: center;
+}
+
+.plan:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.price {
+    font-size: 24px; /* Increase font size for price */
+    font-weight: bold;
+}
+
+/* Payment form */
+.payment-form {
+    text-align: left;
+    margin-top: 20px;
+}
+
+
+    </style>
+</head>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyMovies Subscription</title>
+    <link rel="stylesheet" href="subscription.css">
+    <script src="subscription.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <img src="logo.png" alt="MyMovies Logo" class="logo">
+            <h1 class="brand-name">MyMovies</h1>
+        </div>
+    </header>
+
+    <main>
+        <div class="content-container">
+            <div class="content">
+                <h2 class="main-heading">Ultimate Movies, TV Shows, and More</h2>
+                <div class="pricing">
+                    <div class="plan" onclick="selectPlan('monthly')">
+                        <h3>Monthly</h3>
+                        <p class="price">Rs 250/month</p>
+                    </div>
+                    <div class="plan" onclick="selectPlan('yearly')">
+                        <h3>Yearly</h3>
+                        <p class="price">Rs 1800/year</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+
+
+
+    <script>
+        function selectPlan(plan) {
+    let cost;
+    if (plan === 'monthly') {
+        cost = 250;
+    } else if (plan === 'yearly') {
+        cost = 1800;
+    }
+    // Redirect to the payment page with the selected plan and cost as URL parameters
+    window.location.href = `payment.html?plan=${plan}&cost=${cost}`;
+}
+
+    </script>
+</body>
+
+</html>
